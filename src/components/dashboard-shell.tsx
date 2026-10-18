@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { ArchMark } from "@/components/brand/arch-mark";
 import { NotificationBell } from "@/components/notification-pages";
+import { ThemeToggle } from "./theme-toggle";
 import { api, apiErrorMessage } from "@/lib/api";
 
 type Role = "admin" | "student" | "faculty";
@@ -139,6 +140,7 @@ export function DashboardShell({ role, children }: { role: Role; children: React
           <Link href={role === "admin" ? "/admin" : "/student"} className="mobile-wordmark"><ArchMark compact /><span>{roleLabel}</span></Link>
           <div className="topbar-spacer" />
           <span className="topbar-date">Academic workspace</span>
+          <ThemeToggle />
           <NotificationBell role={role} />
           <span className="topbar-avatar" aria-label={userName}>{initials}</span>
         </header>

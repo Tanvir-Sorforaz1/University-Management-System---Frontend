@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, BookOpenCheck, CalendarDays, CircleDollarSign, GraduationCap, ShieldCheck } from "lucide-react";
 import { ArchMark } from "@/components/brand/arch-mark";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { BRAND } from "@/lib/brand";
 
 async function getApiStatus(): Promise<"normal" | "slow" | undefined> {
@@ -22,7 +23,7 @@ export default async function Home() {
   const apiStatus = await getApiStatus();
   return (
     <main id="main-content" className="public-home">
-      <header className="public-header"><Link href="/" className="home-brand"><ArchMark /></Link><nav aria-label="Primary"><a href="#how-it-works">How it works</a><a href="#for-everyone">For everyone</a></nav><div className="header-actions"><Link href="/login" className="button button-secondary">Sign in</Link><Link href="/register" className="button button-primary">Create account</Link></div></header>
+      <header className="public-header"><Link href="/" className="home-brand"><ArchMark /></Link><nav aria-label="Primary"><a href="#how-it-works">How it works</a><a href="#for-everyone">For everyone</a></nav><div className="header-actions"><ThemeToggle /><Link href="/login" className="button button-secondary">Sign in</Link><Link href="/register" className="button button-primary">Create account</Link></div></header>
       <section className="home-hero">
         <div className="hero-copy"><p className="section-kicker">A calmer academic workspace</p><h1>{BRAND.tagline}</h1><p className="hero-description">Fees, classes, results and transcripts come together in one reliable view, so students can focus on the semester ahead.</p><div className="hero-actions"><Link href="/login" className="button button-primary">Sign in <ArrowRight size={18} /></Link><Link href="#how-it-works" className="button button-secondary">See how it works</Link></div><div className="hero-note"><ShieldCheck size={17} /><span>One university account. A clear record of every semester.</span></div></div>
         <div className="hero-visual" aria-hidden="true"><div className="hero-arch-grid"><span /><span /><span /><span /><span /><span /></div><div className="hero-document"><div className="document-crest"><ArchMark compact /></div><div className="document-line document-line-title" /><div className="document-line" /><div className="document-line document-line-short" /><div className="document-divider" /><div className="document-stat"><strong>Transcript</strong><span>Academic record</span></div><div className="document-bottom"><span /><span /><span /></div></div><div className="hero-stamp"><GraduationCap size={21} /><span>Semester by semester</span></div></div>

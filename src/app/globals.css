@@ -143,6 +143,50 @@
   --input: var(--line-strong);
 }
 
+html.dark {
+  --paper: #101827;
+  --surface: #172235;
+  --surface-sunken: #202d42;
+  --line: #2D3A50;
+  --line-strong: #41506A;
+  --ink: #EDF2FA;
+  --ink-muted: #B7C2D5;
+  --ink-subtle: #8997AE;
+  --lapis-50: #1C2B4B;
+  --lapis-100: #273B65;
+  --lapis-200: #3B5790;
+  --lapis-500: #6F92E8;
+  --lapis-600: #2A4BA0;
+  --lapis-700: #B8CBFF;
+  --verdigris-50: #12363A;
+  --verdigris-100: #1B555A;
+  --verdigris-500: #42BFC5;
+  --verdigris-600: #0E7C86;
+  --verdigris-700: #A0F0EA;
+  --aubergine-50: #352142;
+  --aubergine-100: #543265;
+  --aubergine-500: #B56ADE;
+  --aubergine-600: #6B2D8F;
+  --aubergine-700: #E1B4F5;
+  --saffron-50: #3B3016;
+  --saffron-100: #59471C;
+  --success-soft: #173B2C;
+  --warning-soft: #443714;
+  --danger-soft: #442424;
+  --info-soft: #193451;
+  --neutral-soft: #293247;
+  --neutral-text: #B7C2D5;
+  --primary-foreground: #FFFFFF;
+  --secondary-foreground: var(--ink);
+  --muted-foreground: var(--ink-muted);
+  --border: var(--line);
+  --input: var(--line-strong);
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+}
+
 [data-role="student"] { --role: var(--lapis-600); --role-strong: var(--lapis-700); --role-soft: var(--lapis-50); --role-tint: var(--lapis-100); }
 [data-role="faculty"] { --role: var(--verdigris-600); --role-strong: var(--verdigris-700); --role-soft: var(--verdigris-50); --role-tint: var(--verdigris-100); }
 [data-role="admin"] { --role: var(--aubergine-600); --role-strong: var(--aubergine-700); --role-soft: var(--aubergine-50); --role-tint: var(--aubergine-100); }
@@ -181,6 +225,14 @@ p { text-wrap: pretty; }
 .auth-heading h2 { margin: 7px 0 5px; font-size: 28px; line-height: 1.25; }
 .auth-heading > p:last-child { margin-bottom: 0; color: var(--ink-muted); }
 .form-stack { display: grid; gap: 18px; }
+.demo-login { display: grid; gap: 9px; margin-top: 24px; }
+.demo-login-heading { margin: 0; color: var(--ink-muted); font-size: 13px; font-weight: 600; }
+.demo-login-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.demo-login-button { min-width: 0; display: grid; gap: 2px; border: 1px solid var(--line); border-radius: var(--radius-control); background: var(--surface); padding: 10px 9px; color: var(--ink); text-align: left; cursor: pointer; }
+.demo-login-button:hover { border-color: var(--role); background: var(--role-soft); }
+.demo-login-button strong, .demo-login-button small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.demo-login-button strong { font-size: 12px; }
+.demo-login-button small { color: var(--ink-subtle); font-size: 10px; }
 .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; }
 .field-span { grid-column: 1 / -1; }
 .field-group { min-width: 0; display: grid; gap: 6px; }
@@ -227,6 +279,7 @@ p { text-wrap: pretty; }
   .form-grid { grid-template-columns: 1fr; }
   .field-span { grid-column: auto; }
   .auth-heading h2 { font-size: 25px; }
+  .demo-login-grid { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
@@ -314,7 +367,7 @@ p { text-wrap: pretty; }
 .signout-button:hover { background: var(--surface-sunken); color: var(--ink); }
 .dashboard-main { min-width: 0; flex: 1; margin-left: 264px; }
 [data-role="admin"] .dashboard-main { margin-left: 248px; }
-.dashboard-topbar { position: sticky; z-index: 10; top: 3px; height: 62px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); background: rgb(255 255 255 / 94%); padding: 0 28px; }
+.dashboard-topbar { position: sticky; z-index: 10; top: 3px; height: 62px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--surface) 94%, transparent); padding: 0 28px; }
 .topbar-spacer { flex: 1; }
 .topbar-date { color: var(--ink-subtle); font-size: 13px; }
 .topbar-avatar { width: 34px; height: 36px; margin-left: 4px; }

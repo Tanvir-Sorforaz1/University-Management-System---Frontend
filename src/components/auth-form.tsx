@@ -35,6 +35,8 @@ type LoginValues = z.infer<typeof loginSchema>;
 type RegisterValues = z.infer<typeof registerSchema>;
 type VerifyValues = z.infer<typeof verifySchema>;
 
+export type DemoAccount = { label: string; email: string; password: string };
+
 function FormField({
   id,
   label,
@@ -137,10 +139,11 @@ function findRole(value: unknown): string | undefined {
   return undefined;
 }
 
-function LoginForm() {
+function LoginForm({ demoAccounts }: { demoAccounts: DemoAccount[] }) {
   const router = useRouter();
   const params = useSearchParams();
   const [serverError, setServerError] = useState("");
+  const [demoSubmitting, setDemoSubmitting] = useState<string | null>(null);
   const form = useForm<LoginValues>({ resolver: zodResolver(loginSchema), mode: "onTouched" });
 
   async function submit(values: LoginValues) {
@@ -162,6 +165,12 @@ function LoginForm() {
     }
   }
 
+  async function loginAsDemo(account: (typeof demoAccounts)[number]) {
+    setDemoSubmitting(account.label);
+    await submit({ email: account.email, password: account.password });
+    setDemoSubmitting(null);
+  }
+
   return (
     <AuthFrame eyebrow="Welcome back" title="Your semester, in one place." description="Sign in to keep your academic record close and your next steps clear.">
       <div className="auth-heading"><p className="section-kicker">Student and staff portal</p><h2>Sign in to your account</h2><p>Use your university email and password.</p></div>
@@ -173,6 +182,23 @@ function LoginForm() {
           {form.formState.isSubmitting && <LoaderCircle className="spinner" size={18} />}{form.formState.isSubmitting ? "Signing in" : "Sign in"}
         </button>
       </form>
+      {demoAccounts.length > 0 && <div className="demo-login" aria-label="Sample login accounts">
+        <p className="demo-login-heading">Sample accounts</p>
+        <div className="demo-login-grid">
+          {demoAccounts.map((account) => (
+            <button
+              key={account.label}
+              className="demo-login-button"
+              type="button"
+              disabled={form.formState.isSubmitting || demoSubmitting !== null}
+              onClick={() => void loginAsDemo(account)}
+            >
+              <strong>{demoSubmitting === account.label && <LoaderCircle className="spinner" size={14} />}Log in as {account.label}</strong>
+              <small>{account.email}</small>
+            </button>
+          ))}
+        </div>
+      </div>}
       <p className="auth-switch">New to {BRAND.short}? <Link href="/register">Create an account</Link></p>
     </AuthFrame>
   );
@@ -252,8 +278,8 @@ function VerifyForm() {
   );
 }
 
-export function AuthForm({ mode }: { mode: "login" | "register" | "verify" }) {
+export function AuthForm({ mode, demoAccounts = [] }: { mode: "login" | "register" | "verify"; demoAccounts?: DemoAccount[] }) {
   if (mode === "register") return <RegisterForm />;
   if (mode === "verify") return <VerifyForm />;
-  return <LoginForm />;
+  return <LoginForm demoAccounts={demoAccounts} />;
 }
