@@ -8,7 +8,7 @@ export function ThemeToggle() {
 
   useEffect(() => {
     const savedTheme = window.localStorage.getItem("ums-theme");
-    const shouldUseDarkMode = savedTheme ? savedTheme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const shouldUseDarkMode = savedTheme === "dark";
     document.documentElement.classList.toggle("dark", shouldUseDarkMode);
     setDarkMode(shouldUseDarkMode);
   }, []);
