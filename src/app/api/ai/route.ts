@@ -66,6 +66,9 @@ export async function POST(request: Request) {
         await wait(500 * (attempt + 1));
       }
     }
+    if (!response) {
+      throw new Error("Failed to get a valid response from the AI.");
+    }
     return NextResponse.json({ text: response.text ?? "" });
   } catch (error) {
     console.error("Gemini request failed.", {
@@ -73,7 +76,7 @@ export async function POST(request: Request) {
       message: error instanceof Error ? error.message : "Unknown Gemini error",
     });
     return NextResponse.json(
-      { message: errorStatus(error) === 503 ? TEMPORARY_UNAVAILABLE_MESSAGE : "The AI assistant could not respond." },
+      { message: errorStatus(error) === 503 ? TEMPORARY_UNAVAILABLE_MESSAGE : "The AI assistant could not respond.please check your plan and billing details" },
       { status: 502 },
     );
   }
