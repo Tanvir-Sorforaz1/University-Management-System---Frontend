@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { ArchMark } from "@/components/brand/arch-mark";
+import { AiAssistant } from "@/components/ai-assistant";
 import { NotificationBell } from "@/components/notification-pages";
 import { ThemeToggle } from "./theme-toggle";
 import { api, apiErrorMessage } from "@/lib/api";
@@ -146,6 +147,7 @@ export function DashboardShell({ role, children }: { role: Role; children: React
         </header>
         <main id="main-content" className="dashboard-content">{children}</main>
       </div>
+      <AiAssistant />
     </div>
   );
 }
